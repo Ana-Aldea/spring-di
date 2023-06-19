@@ -5,11 +5,9 @@ import com.example.springdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.springdi.services.*;
 import org.example.pets.PetService;
 import org.example.pets.PetServiceFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
+@ImportResource("classpath:springdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
     @Bean
@@ -51,11 +49,6 @@ public class GreetingServiceConfig {
     @Bean
     PrimaryGreetingService primaryGreetingService() {
         return new PrimaryGreetingService();
-    }
-
-    @Bean
-    ConstructorGreetingService constructorGreetingService() {
-        return new ConstructorGreetingService();
     }
 
     @Bean
