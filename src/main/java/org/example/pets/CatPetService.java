@@ -1,4 +1,4 @@
-package com.example.springdi.services;
+package org.example.pets;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
