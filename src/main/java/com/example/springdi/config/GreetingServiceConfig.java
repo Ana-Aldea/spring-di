@@ -1,5 +1,7 @@
 package com.example.springdi.config;
 
+import com.example.springdi.repositories.EnglishGreetingRepository;
+import com.example.springdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.springdi.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,15 +12,21 @@ import org.springframework.context.annotation.Profile;
 public class GreetingServiceConfig {
 
     @Profile({"ES", "default"})
-    @Bean("i18nService") //by default, Spring uses the method name unless you override it - which we did here
+    @Bean("i18nService")
+        //by default, Spring uses the method name unless you override it - which we did here
     I18NSpanishService i18NSpanishService() {
         return new I18NSpanishService();
     }
 
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository() {
+        return new EnglishGreetingRepositoryImpl();
+    }
+
     @Profile("EN")
     @Bean
-    I18nEnglishGreetingService i18nService() {
-        return new I18nEnglishGreetingService();
+    I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository) {
+        return new I18nEnglishGreetingService(englishGreetingRepository);
     }
 
     @Primary
